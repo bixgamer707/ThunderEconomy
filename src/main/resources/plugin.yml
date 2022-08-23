@@ -1,0 +1,7 @@
+name: Economy
+version: '${project.version}'
+main: me.bixgamer707.economy.economy.Economy
+api-version: 1.19
+authors: [ bixgamer707 ]
+description: A economy plugin of the ThunderMC
+website: http://discord.thunderloots.xyz
