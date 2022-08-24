@@ -1,4 +1,4 @@
-package me.bixgamer707.economy.economy.bank.api.bank;
+package me.bixgamer707.economy.api.bank;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;

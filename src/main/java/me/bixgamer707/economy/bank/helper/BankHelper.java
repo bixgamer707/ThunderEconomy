@@ -1,7 +1,7 @@
-package me.bixgamer707.economy.economy.bank.helper;
+package me.bixgamer707.economy.bank.helper;
 
-import me.bixgamer707.economy.economy.bank.Bank;
-import me.bixgamer707.economy.economy.bank.api.bank.ProcessMethodEnum;
+import me.bixgamer707.economy.api.bank.ProcessMethodEnum;
+import me.bixgamer707.economy.bank.Bank;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package me.bixgamer707.economy.economy.bank.api.loader;
+package me.bixgamer707.economy.api.loader;
 
 public interface LoaderManager {
 
