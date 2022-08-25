@@ -2,6 +2,7 @@ package me.bixgamer707.economy.bank;
 
 import me.bixgamer707.economy.api.bank.BankProcess;
 import me.bixgamer707.economy.api.bank.ProcessMethodEnum;
+import me.bixgamer707.economy.bank.helper.actions.BankActions;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -14,13 +15,24 @@ public class Bank extends BankProcess {
 
     private final String id;
     private final Map<UUID, Double> balances;
+    private final BankActions bankActions;
+
     public Bank(String id){
         this.id = id;
         this.balances = new HashMap<>();
+        this.bankActions = new BankActions(this);
     }
 
     public String getId() {
         return id;
+    }
+
+    public Map<UUID, Double> getBalances() {
+        return balances;
+    }
+
+    public BankActions actions() {
+        return bankActions;
     }
 
     @Override
