@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Economy extends JavaPlugin {
 
     private static Economy instance;
+    private EconomyProvider provider;
 
     @Override
     public void onLoad(){
@@ -24,11 +25,12 @@ public final class Economy extends JavaPlugin {
         registerTabCompletions();
         registerListeners();
 
+        provider = new EconomyProvider(this);
         BankBuilder.build(
                 ProcessMethodEnum.ASYNC,
                 "global*"
         );
-        getServer().getServicesManager().register(Economy.class, this, this, ServicePriority.Highest);
+        getServer().getServicesManager().register(EconomyProvider.class, provider, this, ServicePriority.Normal);
     }
 
     @Override
@@ -56,5 +58,9 @@ public final class Economy extends JavaPlugin {
 
     public static Economy getInstance() {
         return instance;
+    }
+
+    public EconomyProvider getProvider() {
+        return provider;
     }
 }
