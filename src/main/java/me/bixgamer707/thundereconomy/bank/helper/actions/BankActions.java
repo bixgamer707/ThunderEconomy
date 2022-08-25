@@ -11,9 +11,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class BankActions {
 
-    private Bank bank;
-    public BankActions(){}
-
+    private final Bank bank;
     public BankActions(Bank bank){
         this.bank = bank;
     }
@@ -251,44 +249,8 @@ public class BankActions {
     //    "global*"
     //).getActions()
 
-    public void withdrawBalance(ProcessMethodEnum processMethod, UUID uuid, double balance) {
-        Bank bank = this.bank;
-        switch (processMethod){
-            case ASYNC: {
-                CompletableFuture.runAsync(() -> {
-                    double afterBalance = 0;
-                    if(bank.getBalances().containsKey(uuid)){
-                        afterBalance = bank.getBalances().get(uuid);
-                    }
-
-                    if(balance >= afterBalance){
-                        bank.getBalances().put(uuid, 0.0);
-                        return;
-                    }
-
-                    bank.getBalances().put(uuid, (afterBalance - balance));
-                });
-                break;
-            }
-            case SYNC: {
-                double afterBalance = 0;
-                if(bank.getBalances().containsKey(uuid)){
-                    afterBalance = bank.getBalances().get(uuid);
-                }
-
-                if(balance >= afterBalance){
-                    bank.getBalances().put(uuid, 0.0);
-                    return;
-                }
-
-                bank.getBalances().put(uuid, (afterBalance - balance));
-                break;
-            }
-        }
-    }
-
     public void withdrawBalance(ProcessMethodEnum processMethod, Player player, double balance){
-        withdrawBalance(processMethod, player.getUniqueId(), balance);
+        withdrawBalance(processMethod, bank, player.getUniqueId(), balance);
     }
 
     public void withdrawBalance(ProcessMethodEnum processMethod, OfflinePlayer player, double balance) {
@@ -297,7 +259,7 @@ public class BankActions {
 
     @Deprecated
     public void withdrawBalance(UUID player, double balance){
-        withdrawBalance(ProcessMethodEnum.ASYNC, player, balance);
+        withdrawBalance(ProcessMethodEnum.ASYNC, bank, player, balance);
     }
 
     @Deprecated
@@ -311,35 +273,8 @@ public class BankActions {
     }
 
     //Deposit local
-
-    public void depositBalance(ProcessMethodEnum processMethod, UUID uuid, double balance) {
-        Bank bank = this.bank;
-        switch (processMethod){
-            case ASYNC: {
-                CompletableFuture.runAsync(() -> {
-                    double afterBalance = 0;
-                    if(bank.getBalances().containsKey(uuid)){
-                        afterBalance = bank.getBalances().get(uuid);
-                    }
-
-                    bank.getBalances().put(uuid, (afterBalance + balance));
-                });
-                break;
-            }
-            case SYNC: {
-                double afterBalance = 0;
-                if(bank.getBalances().containsKey(uuid)){
-                    afterBalance = bank.getBalances().get(uuid);
-                }
-
-                bank.getBalances().put(uuid, (afterBalance + balance));
-                break;
-            }
-        }
-    }
-
     public void depositBalance(ProcessMethodEnum processMethod, Player player, double balance){
-        depositBalance(processMethod, player.getUniqueId(), balance);
+        depositBalance(processMethod, bank, player.getUniqueId(), balance);
     }
 
     public void depositBalance(ProcessMethodEnum processMethod, OfflinePlayer player, double balance) {
@@ -348,7 +283,7 @@ public class BankActions {
 
     @Deprecated
     public void depositBalance(UUID player, double balance){
-        depositBalance(ProcessMethodEnum.ASYNC, player, balance);
+        depositBalance(ProcessMethodEnum.ASYNC, bank, player, balance);
     }
 
     @Deprecated
