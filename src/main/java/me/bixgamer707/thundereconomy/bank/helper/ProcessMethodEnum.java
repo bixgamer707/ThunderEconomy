@@ -1,4 +1,4 @@
-package me.bixgamer707.thundereconomy.api.bank;
+package me.bixgamer707.thundereconomy.bank.helper;
 
 public enum ProcessMethodEnum {
     SYNC,

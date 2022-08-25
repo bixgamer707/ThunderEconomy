@@ -1,20 +1,24 @@
 package me.bixgamer707.thundereconomy;
 
-import me.bixgamer707.thundereconomy.api.bank.ProcessMethodEnum;
-import me.bixgamer707.thundereconomy.bank.helper.BankBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class Economy extends JavaPlugin {
+public final class Economy extends JavaPlugin implements Listener {
 
     private static Economy instance;
-    private EconomyProvider provider;
 
     @Override
     public void onLoad(){
         instance = this;
+
+        /*try {
+            Class.forName("me.bixgamer707.thundereconomy.Economy");
+            getServer().getServicesManager().register(Economy.class, new VaultEconomyProvider(this), this, ServicePriority.Normal);
+        } catch (final ClassNotFoundException ignored) {
+
+        }*/
     }
 
     @Override
@@ -25,17 +29,13 @@ public final class Economy extends JavaPlugin {
         registerTabCompletions();
         registerListeners();
 
-        provider = new EconomyProvider(this);
-        BankBuilder.build(
-                ProcessMethodEnum.ASYNC,
-                "global*"
-        );
-        getServer().getServicesManager().register(EconomyProvider.class, provider, this, ServicePriority.Normal);
+
     }
 
     @Override
     public void onDisable() {
         instance = null;
+        getServer().getServicesManager().unregisterAll(this);
     }
 
     public void registerCommands(){
@@ -60,7 +60,8 @@ public final class Economy extends JavaPlugin {
         return instance;
     }
 
-    public EconomyProvider getProvider() {
-        return provider;
+    @EventHandler
+    public void onTransaction(){
+
     }
 }
