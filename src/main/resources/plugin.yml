@@ -1,7 +1,9 @@
-name: Economy
+name: ThunderEconomy
 version: '${project.version}'
-main: me.bixgamer707.economy.Economy
+main: me.bixgamer707.thundereconomy.Economy
 api-version: 1.13
 authors: [ bixgamer707 ]
 description: A economy plugin of the ThunderMC
 website: http://discord.thunderloots.xyz
+loadbefore:
+  - UltraStats
