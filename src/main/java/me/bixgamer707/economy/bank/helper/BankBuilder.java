@@ -7,10 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-public class BankHelper {
+public class BankBuilder {
 
     private static Map<String, Bank> banks;
-    public BankHelper(){
+    public BankBuilder(){
         banks = new HashMap<>();
     }
 
