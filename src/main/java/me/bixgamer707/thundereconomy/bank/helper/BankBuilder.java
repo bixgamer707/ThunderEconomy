@@ -9,9 +9,13 @@ import java.util.concurrent.CompletableFuture;
 
 public class BankBuilder {
 
-    private static final Map<String, Bank> banks = new HashMap<>();
+    private static Map<String, Bank> banks = new HashMap<>();
 
     public static Bank build(ProcessMethodEnum processMethod, String id){
+        if(banks == null){
+            banks = new HashMap<>();
+        }
+
         final Bank bank = banks.get(id);
 
         switch (processMethod){
@@ -33,7 +37,7 @@ public class BankBuilder {
         }
         return bank;
     }
-    public void remove(ProcessMethodEnum processMethod, String id){
+    public static void remove(ProcessMethodEnum processMethod, String id){
         switch (processMethod){
             case SYNC: {
                 banks.remove(id);
