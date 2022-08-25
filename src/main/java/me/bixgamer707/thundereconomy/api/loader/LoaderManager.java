@@ -1,4 +1,4 @@
-package me.bixgamer707.economy.api.loader;
+package me.bixgamer707.thundereconomy.api.loader;
 
 public interface LoaderManager {
 

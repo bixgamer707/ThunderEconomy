@@ -1,7 +1,7 @@
-package me.bixgamer707.economy.bank.helper;
+package me.bixgamer707.thundereconomy.bank.helper;
 
-import me.bixgamer707.economy.api.bank.ProcessMethodEnum;
-import me.bixgamer707.economy.bank.Bank;
+import me.bixgamer707.thundereconomy.api.bank.ProcessMethodEnum;
+import me.bixgamer707.thundereconomy.bank.Bank;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,10 +9,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class BankBuilder {
 
-    private static Map<String, Bank> banks;
-    public BankBuilder(){
-        banks = new HashMap<>();
-    }
+    private static final Map<String, Bank> banks = new HashMap<>();
 
     public static Bank build(ProcessMethodEnum processMethod, String id){
         final Bank bank = banks.get(id);

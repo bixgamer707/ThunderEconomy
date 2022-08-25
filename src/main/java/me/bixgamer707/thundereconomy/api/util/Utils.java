@@ -1,4 +1,4 @@
-package me.bixgamer707.economy.api.util;
+package me.bixgamer707.thundereconomy.api.util;
 
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;

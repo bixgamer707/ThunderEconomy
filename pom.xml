@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.bixgamer707</groupId>
-    <artifactId>Economy</artifactId>
-    <version>v1.1</version>
+    <artifactId>ThunderEconomy</artifactId>
+    <version>v1.3</version>
     <packaging>jar</packaging>
 
-    <name>Economy</name>
+    <name>ThunderEconomy</name>
 
     <description>A system economy for ThunderMC</description>
     <properties>

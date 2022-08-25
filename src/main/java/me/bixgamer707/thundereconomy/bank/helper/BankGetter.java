@@ -1,7 +1,7 @@
-package me.bixgamer707.economy.bank.helper;
+package me.bixgamer707.thundereconomy.bank.helper;
 
-import me.bixgamer707.economy.api.bank.ProcessMethodEnum;
-import me.bixgamer707.economy.bank.Bank;
+import me.bixgamer707.thundereconomy.api.bank.ProcessMethodEnum;
+import me.bixgamer707.thundereconomy.bank.Bank;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 

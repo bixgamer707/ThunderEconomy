@@ -1,7 +1,7 @@
-package me.bixgamer707.economy;
+package me.bixgamer707.thundereconomy;
 
-import me.bixgamer707.economy.api.bank.ProcessMethodEnum;
-import me.bixgamer707.economy.bank.helper.BankBuilder;
+import me.bixgamer707.thundereconomy.api.bank.ProcessMethodEnum;
+import me.bixgamer707.thundereconomy.bank.helper.BankBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.ServicePriority;
@@ -12,10 +12,13 @@ public final class Economy extends JavaPlugin {
     private static Economy instance;
 
     @Override
-    public void onEnable() {
+    public void onLoad(){
         instance = this;
+    }
+
+    @Override
+    public void onEnable() {
         // Plugin startup logic
-        new BankBuilder();
         registerCommands();
         registerPlaceholders();
         registerTabCompletions();
@@ -25,7 +28,7 @@ public final class Economy extends JavaPlugin {
                 ProcessMethodEnum.ASYNC,
                 "global*"
         );
-        Bukkit.getServicesManager().register(Economy.class, this, this, ServicePriority.Highest);
+        getServer().getServicesManager().register(Economy.class, this, this, ServicePriority.Highest);
     }
 
     @Override
