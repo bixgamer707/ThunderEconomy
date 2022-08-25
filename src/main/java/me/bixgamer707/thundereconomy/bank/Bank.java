@@ -108,6 +108,54 @@ public class Bank extends BankProcess {
     }
 
     @Override
+    public void removePlayer(ProcessMethodEnum processMethod, Player player) {
+        switch (processMethod){
+            case SYNC: {
+                if(player == null){
+                    return;
+                }
+
+                balances.remove(player.getUniqueId());
+                break;
+            }
+            case ASYNC: {
+                CompletableFuture.runAsync(() -> {
+                    if(player == null){
+                        return;
+                    }
+
+                    balances.remove(player.getUniqueId());
+                });
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void removePlayerWithUUID(ProcessMethodEnum processMethod, UUID player) {
+        switch (processMethod){
+            case SYNC: {
+                if(player == null){
+                    return;
+                }
+
+                balances.remove(player);
+                break;
+            }
+            case ASYNC: {
+                CompletableFuture.runAsync(() -> {
+                    if(player == null){
+                        return;
+                    }
+
+                    balances.remove(player);
+                });
+                break;
+            }
+        }
+    }
+
+    @Override
     public void removeOfflinePlayer(ProcessMethodEnum processMethod, OfflinePlayer player) {
         switch (processMethod){
             case SYNC: {
@@ -134,171 +182,53 @@ public class Bank extends BankProcess {
     @Override
     @Deprecated
     public void removeOfflinePlayer(OfflinePlayer player) {
-        CompletableFuture.runAsync(() -> {
-            if(player == null){
-                return;
-            }
-
-            balances.remove(player.getUniqueId());
-        });
+        removeOfflinePlayer(ProcessMethodEnum.ASYNC, player);
     }
 
     @Override
     @Deprecated
     public void removePlayer(Player player) {
-        CompletableFuture.runAsync(() -> {
-            if(player == null){
-                return;
-            }
-
-            balances.remove(player.getUniqueId());
-        });
+        removePlayer(ProcessMethodEnum.ASYNC, player);
     }
 
     @Override
     @Deprecated
     public void removePlayerWithUUID(UUID player) {
-        CompletableFuture.runAsync(() -> {
-            if (player == null) {
-                return;
-            }
-
-            balances.remove(player);
-        });
+        removePlayerWithUUID(ProcessMethodEnum.ASYNC, player);
     }
 
     @Override
     @Deprecated
     public void createOfflinePlayer(OfflinePlayer player, double startBalance) {
-        CompletableFuture.runAsync(() -> {
-            if(player == null){
-                return;
-            }
-
-            if(player.isBanned()){
-                return;
-            }
-
-            balances.put(player.getUniqueId(), startBalance);
-        });
+        createOfflinePlayer(ProcessMethodEnum.ASYNC, player, startBalance);
     }
 
     @Override
     public void createPlayer(Player player, double startBalance) {
-        CompletableFuture.runAsync(() -> {
-            if(player == null){
-                return;
-            }
-
-            if(player.isBanned()){
-                return;
-            }
-
-            balances.put(player.getUniqueId(), startBalance);
-        });
+        createPlayer(ProcessMethodEnum.ASYNC, player, startBalance);
     }
 
     @Override
     @Deprecated
     public void createPlayerWithUUID(UUID player, double startBalance) {
-        CompletableFuture.runAsync(() -> {
-            if(player == null){
-                return;
-            }
-
-            balances.put(player, 0.0);
-        });
+        createPlayerWithUUID(ProcessMethodEnum.ASYNC, player, startBalance);
     }
 
     @Override
     @Deprecated
     public void createPlayer(Player player) {
-        CompletableFuture.runAsync(() -> {
-            if(player == null){
-                return;
-            }
-
-            if(player.isBanned()){
-                return;
-            }
-
-            balances.put(player.getUniqueId(), 0.0);
-        });
+        createPlayer(ProcessMethodEnum.ASYNC, player, 0.0);
     }
 
     @Override
     @Deprecated
     public void createOfflinePlayer(OfflinePlayer player) {
-        CompletableFuture.runAsync(() -> {
-            if(player == null){
-                return;
-            }
-
-            if(player.isBanned()){
-                return;
-            }
-
-            balances.put(player.getUniqueId(), 0.0);
-        });
+        createPlayerWithUUID(player.getUniqueId());
     }
 
     @Override
     @Deprecated
     public void createPlayerWithUUID(UUID player) {
-        CompletableFuture.runAsync(() -> {
-            if(player == null){
-                return;
-            }
-
-            balances.put(player, 0.0);
-        });
-    }
-
-    @Override
-    public void removePlayer(ProcessMethodEnum processMethod, Player player) {
-        switch (processMethod){
-            case SYNC: {
-                if(player == null){
-                    return;
-                }
-
-                balances.remove(player.getUniqueId());
-                break;
-            }
-            case ASYNC: {
-                CompletableFuture.runAsync(() -> {
-                    if(player == null){
-                        return;
-                    }
-
-                    balances.remove(player.getUniqueId());
-                });
-                break;
-            }
-        }
-    }
-
-    @Override
-    public void removePlayerWithUUID(ProcessMethodEnum processMethod, UUID uuid) {
-        switch (processMethod){
-            case SYNC: {
-                if(uuid == null){
-                    return;
-                }
-
-                balances.remove(uuid);
-                break;
-            }
-            case ASYNC: {
-                CompletableFuture.runAsync(() -> {
-                    if(uuid == null){
-                        return;
-                    }
-
-                    balances.remove(uuid);
-                });
-                break;
-            }
-        }
+        createPlayerWithUUID(ProcessMethodEnum.ASYNC, player, 0.0);
     }
 }
