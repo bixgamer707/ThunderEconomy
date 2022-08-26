@@ -1,4 +1,4 @@
-package me.bixgamer707.thundereconomy.bank.helper;
+package me.bixgamer707.thundereconomy.bank.manager;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
@@ -12,7 +12,6 @@ public interface Bank {
     String getId();
 
     Map<UUID, Double> getBalances();
-
 
     void setBalance(UUID player, double balance);
 

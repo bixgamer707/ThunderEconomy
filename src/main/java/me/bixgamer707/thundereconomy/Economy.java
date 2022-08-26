@@ -8,23 +8,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Economy extends JavaPlugin implements Listener {
 
-    private static Economy instance;
-
-    @Override
-    public void onLoad(){
-        instance = this;
-
-        /*try {
-            Class.forName("me.bixgamer707.thundereconomy.Economy");
-            getServer().getServicesManager().register(Economy.class, new VaultEconomyProvider(this), this, ServicePriority.Normal);
-        } catch (final ClassNotFoundException ignored) {
-
-        }*/
-    }
-
     @Override
     public void onEnable() {
-        // Plugin startup logic
         registerCommands();
         registerPlaceholders();
         registerTabCompletions();
@@ -35,7 +20,6 @@ public final class Economy extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        instance = null;
         getServer().getServicesManager().unregisterAll(this);
     }
 
@@ -47,19 +31,10 @@ public final class Economy extends JavaPlugin implements Listener {
 
     }
 
-    public void registerListeners(Listener... listeners){
-        for(Listener listener : listeners){
-            Bukkit.getPluginManager().registerEvents(listener, this);
-        }
-    }
-
     public void registerPlaceholders(){
 
     }
 
-    public static Economy getInstance() {
-        return instance;
-    }
 
     @EventHandler
     public void onTransaction(ServerTransactionEvent event){

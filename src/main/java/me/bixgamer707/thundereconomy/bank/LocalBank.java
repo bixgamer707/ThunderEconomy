@@ -2,7 +2,7 @@ package me.bixgamer707.thundereconomy.bank;
 
 import me.bixgamer707.thundereconomy.bank.events.PlayerTransactionEvent;
 import me.bixgamer707.thundereconomy.bank.events.ServerTransactionEvent;
-import me.bixgamer707.thundereconomy.bank.helper.Bank;
+import me.bixgamer707.thundereconomy.bank.manager.Bank;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;

@@ -1,6 +1,6 @@
 package me.bixgamer707.thundereconomy.bank.events;
 
-import me.bixgamer707.thundereconomy.bank.helper.Bank;
+import me.bixgamer707.thundereconomy.bank.manager.Bank;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
