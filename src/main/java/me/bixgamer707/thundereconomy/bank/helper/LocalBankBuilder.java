@@ -8,7 +8,7 @@ import java.util.Map;
 public abstract class LocalBankBuilder implements BankBuilder{
 
     private final Map<String, Bank> banks;
-    private LocalBankBuilder(){
+    public LocalBankBuilder(){
         banks = new HashMap<>();
     }
     @Override
