@@ -8,9 +8,11 @@ import java.util.Map;
 public abstract class LocalBankBuilder implements BankBuilder{
 
     private final Map<String, Bank> banks;
+
     public LocalBankBuilder(){
         banks = new HashMap<>();
     }
+
     @Override
     public Map<String, Bank> getBanks() {
         return banks;
@@ -38,6 +40,6 @@ public abstract class LocalBankBuilder implements BankBuilder{
 
     @Override
     public Bank getBank(String id) {
-        return null;
+        return banks.get(id);
     }
 }
