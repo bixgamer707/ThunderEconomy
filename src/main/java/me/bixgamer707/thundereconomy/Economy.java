@@ -1,5 +1,6 @@
 package me.bixgamer707.thundereconomy;
 
+import me.bixgamer707.thundereconomy.bank.events.ServerTransactionEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,8 +28,8 @@ public final class Economy extends JavaPlugin implements Listener {
         registerCommands();
         registerPlaceholders();
         registerTabCompletions();
-        registerListeners();
 
+        Bukkit.getPluginManager().registerEvents(this,this);
 
     }
 
@@ -61,7 +62,11 @@ public final class Economy extends JavaPlugin implements Listener {
     }
 
     @EventHandler
-    public void onTransaction(){
+    public void onTransaction(ServerTransactionEvent event){
+        if(event.getBank().getId().equals("global*")){
+            double balance = event.getMoney() * getConfig().getInt("multiplier");
 
+            event.setMoney(balance);
+        }
     }
 }

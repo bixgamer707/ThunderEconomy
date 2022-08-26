@@ -1,7 +1,6 @@
 package me.bixgamer707.thundereconomy.bank.events;
 
-import me.bixgamer707.thundereconomy.bank.helper.AbstractBank;
-import me.bixgamer707.thundereconomy.bank.helper.ProcessMethodEnum;
+import me.bixgamer707.thundereconomy.bank.helper.Bank;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
@@ -13,23 +12,20 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class ServerTransactionEvent  extends Event implements Cancellable {
+public class ServerTransactionEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
     private boolean isCancelled;
 
     private final UUID uuid;
     private double balancePlayer;
-    private double cost;
-    private final AbstractBank bank;
-    private final ProcessMethodEnum processMethod;
+    private double money;
+    private final Bank bank;
 
-    public ServerTransactionEvent(UUID playerUUID, double balancePlayer, double cost, AbstractBank abstractBank,
-                             ProcessMethodEnum processMethod) {
+    public ServerTransactionEvent(UUID playerUUID, double balancePlayer, double money, Bank bank) {
         this.uuid = playerUUID;
         this.balancePlayer = balancePlayer;
-        this.cost = cost;
-        this.bank = abstractBank;
-        this.processMethod = processMethod;
+        this.money = money;
+        this.bank = bank;
         this.isCancelled = false;
     }
 
@@ -53,20 +49,24 @@ public class ServerTransactionEvent  extends Event implements Cancellable {
         return Bukkit.getPlayer(uuid);
     }
 
-    public double getCost() {
-        return cost;
+    public double getMoney() {
+        return money;
     }
 
     public double getBalancePlayer() {
         return balancePlayer;
     }
 
-    public void setCost(double cost) {
-        this.cost = cost;
+    public Bank getBank() {
+        return bank;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
     }
 
     public void setBalancePlayer(double balancePlayer) {
-        bank.setBalance(processMethod, getUUID(), balancePlayer);
+        bank.setBalance(getUUID(), balancePlayer);
         this.balancePlayer = balancePlayer;
     }
 
