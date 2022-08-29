@@ -2,7 +2,7 @@ package me.bixgamer707.thundereconomy.bank;
 
 import me.bixgamer707.thundereconomy.bank.events.PlayerTransactionEvent;
 import me.bixgamer707.thundereconomy.bank.events.ServerTransactionEvent;
-import me.bixgamer707.thundereconomy.bank.manager.Bank;
+import me.bixgamer707.thundereconomy.bank.helper.TransactionType;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
@@ -38,7 +38,18 @@ public abstract class LocalBank implements Bank {
         if(uuid == null){
             return;
         }
-        balances.put(uuid, balance);
+        double balancePlayer = 0;
+        if(balances.get(uuid) != null){
+            balancePlayer = balances.get(uuid);
+        }
+
+        ServerTransactionEvent serverEvent = new ServerTransactionEvent(uuid, balancePlayer, balance,
+                this, TransactionType.SET_BALANCE);
+        Bukkit.getPluginManager().callEvent(serverEvent);
+        if(!serverEvent.isCancelled()){
+            balances.put(uuid, serverEvent.getMoney());
+        }
+
     }
 
     @Override
@@ -54,7 +65,7 @@ public abstract class LocalBank implements Bank {
     @Override
     public boolean withdrawBalance(UUID uuid, double balance) {
         ServerTransactionEvent serverEvent = new ServerTransactionEvent(
-                uuid, getBalance(uuid), balance, this
+                uuid, getBalance(uuid), balance, this, TransactionType.WITHDRAW_SERVER
         );
         Bukkit.getPluginManager().callEvent(serverEvent);
 
@@ -88,7 +99,7 @@ public abstract class LocalBank implements Bank {
     @Override
     public boolean depositBalance(UUID uuid, double balance) {
         ServerTransactionEvent serverEvent = new ServerTransactionEvent(
-                uuid, getBalance(uuid), balance, this
+                uuid, getBalance(uuid), balance, this, TransactionType.DEPOSIT_SERVER
         );
         Bukkit.getPluginManager().callEvent(serverEvent);
         if(!serverEvent.isCancelled()){
@@ -243,7 +254,7 @@ public abstract class LocalBank implements Bank {
 
         if(getBalance(player) >= balance){
             PlayerTransactionEvent playerEvent = new PlayerTransactionEvent(
-                    player, target, getBalance(player), balance, this
+                    player, target, getBalance(player), balance, this, TransactionType.TRANSFER_PLAYER
             );
             Bukkit.getPluginManager().callEvent(playerEvent);
 

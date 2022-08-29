@@ -1,6 +1,6 @@
-package me.bixgamer707.thundereconomy.bank.helper;
+package me.bixgamer707.thundereconomy.bank.manager;
 
-import me.bixgamer707.thundereconomy.bank.manager.Bank;
+import me.bixgamer707.thundereconomy.bank.Bank;
 import org.bukkit.plugin.Plugin;
 
 import java.util.Map;

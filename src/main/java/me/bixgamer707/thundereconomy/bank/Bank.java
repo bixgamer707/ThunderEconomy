@@ -1,4 +1,4 @@
-package me.bixgamer707.thundereconomy.bank.manager;
+package me.bixgamer707.thundereconomy.bank;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
