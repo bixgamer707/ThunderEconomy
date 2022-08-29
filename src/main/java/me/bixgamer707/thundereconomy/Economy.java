@@ -41,7 +41,16 @@ public final class Economy extends JavaPlugin implements Listener {
         if(event.getBank().getId().equals("global*")){
             double balance = event.getMoney() * getConfig().getInt("multiplier");
 
-            event.setMoney(balance);
+            switch (event.getType()){
+                case WITHDRAW_SERVER:
+                case WITHDRAW_PLAYER:
+                    break;
+                case DEPOSIT_SERVER:
+                case DEPOSIT_PLAYER:
+                case SET_BALANCE:
+                    event.setMoney(balance);
+                    break;
+            }
         }
     }
 }
