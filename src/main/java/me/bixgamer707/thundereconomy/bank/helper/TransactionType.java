@@ -8,6 +8,16 @@ public enum TransactionType {
     TRANSFER_PLAYER(2),
     SET_BALANCE(1);
 
+    /*
+
+    *   The int type defines from where it is executed, CONSOLE OR PLAYER.
+    *
+    *   @param type 1 for console and 2 for player
+    *
+    *   @return Returns an integer, 1 or 2 depending on the situation
+    *
+     */
+
     private final int type;
     TransactionType(int type) {
         this.type = type;
