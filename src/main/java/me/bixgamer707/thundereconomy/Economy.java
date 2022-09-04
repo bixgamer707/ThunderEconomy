@@ -1,6 +1,6 @@
 package me.bixgamer707.thundereconomy;
 
-import me.bixgamer707.thundereconomy.bank.EconomyCommand;
+import me.bixgamer707.thundereconomy.commands.EconomyCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Economy extends JavaPlugin {

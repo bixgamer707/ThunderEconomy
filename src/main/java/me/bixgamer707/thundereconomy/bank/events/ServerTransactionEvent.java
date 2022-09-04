@@ -2,6 +2,7 @@ package me.bixgamer707.thundereconomy.bank.events;
 
 import me.bixgamer707.thundereconomy.bank.Bank;
 import me.bixgamer707.thundereconomy.bank.helper.TransactionType;
+import me.bixgamer707.thundereconomy.user.UserData;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
@@ -11,6 +12,8 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.jws.soap.SOAPBinding;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public class ServerTransactionEvent extends Event implements Cancellable {
@@ -18,15 +21,15 @@ public class ServerTransactionEvent extends Event implements Cancellable {
     private boolean isCancelled;
 
     private final UUID uuid;
-    private double balancePlayer;
-    private double money;
+    private UserData user;
+    private BigDecimal money;
     private final Bank bank;
     private final TransactionType type;
 
-    public ServerTransactionEvent(UUID playerUUID, double balancePlayer, double money, Bank bank,
+    public ServerTransactionEvent(UUID playerUUID, UserData user, BigDecimal money, Bank bank,
                                   TransactionType type) {
         this.uuid = playerUUID;
-        this.balancePlayer = balancePlayer;
+        this.user = user;
         this.money = money;
         this.bank = bank;
         this.type = type;
@@ -53,25 +56,20 @@ public class ServerTransactionEvent extends Event implements Cancellable {
         return Bukkit.getPlayer(uuid);
     }
 
-    public double getMoney() {
+    public BigDecimal getMoney() {
         return money;
     }
 
-    public double getBalancePlayer() {
-        return balancePlayer;
+    public UserData getUser() {
+        return user;
     }
 
     public Bank getBank() {
         return bank;
     }
 
-    public void setMoney(double money) {
+    public void setMoney(BigDecimal money) {
         this.money = money;
-    }
-
-    public void setBalancePlayer(double balancePlayer) {
-        bank.setBalance(getUUID(), balancePlayer);
-        this.balancePlayer = balancePlayer;
     }
 
     public TransactionType getType() {

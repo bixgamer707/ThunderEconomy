@@ -1,9 +1,11 @@
 package me.bixgamer707.thundereconomy.bank;
 
+import me.bixgamer707.thundereconomy.user.UserData;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 
+import java.math.BigDecimal;
 import java.util.Map;
 import java.util.UUID;
 
@@ -23,7 +25,7 @@ public interface Bank {
      *
      */
 
-    Map<UUID, Double> getBalances();
+    Map<UUID, UserData> getUserDataMap();
 
     /*
      *
@@ -33,7 +35,7 @@ public interface Bank {
      *
      */
 
-    void setBalance(UUID player, double balance);
+    void setBalance(UUID player, BigDecimal balance);
 
     /*
      *
@@ -43,7 +45,7 @@ public interface Bank {
      *
      */
 
-    void setBalance(OfflinePlayer player, double balance);
+    void setBalance(OfflinePlayer player, BigDecimal balance);
 
     /*
      *
@@ -53,7 +55,7 @@ public interface Bank {
      *
      */
 
-    void setBalance(Player player, double balance);
+    void setBalance(Player player, BigDecimal balance);
 
     /*
      *
@@ -65,7 +67,7 @@ public interface Bank {
      *
      */
 
-    boolean withdrawBalance(UUID player, double balance);
+    boolean withdrawBalance(UUID player, BigDecimal balance);
 
     /*
      *
@@ -77,7 +79,7 @@ public interface Bank {
      *
      */
 
-    boolean withdrawBalance(Player player, double balance);
+    boolean withdrawBalance(Player player, BigDecimal balance);
 
     /*
      *
@@ -89,7 +91,7 @@ public interface Bank {
      *
      */
 
-    boolean withdrawBalance(OfflinePlayer player, double balance);
+    boolean withdrawBalance(OfflinePlayer player, BigDecimal balance);
 
     /*
      *
@@ -102,7 +104,7 @@ public interface Bank {
      *
      */
 
-    boolean depositBalance(UUID player, double balance);
+    boolean depositBalance(UUID player, BigDecimal balance);
 
     /*
      *
@@ -116,7 +118,7 @@ public interface Bank {
      */
 
 
-    boolean depositBalance(Player player, double balance);
+    boolean depositBalance(Player player, BigDecimal balance);
 
     /*
      *
@@ -129,7 +131,7 @@ public interface Bank {
      *
      */
 
-    boolean depositBalance(OfflinePlayer player, double balance);
+    boolean depositBalance(OfflinePlayer player, BigDecimal balance);
 
     /*
      *
@@ -145,7 +147,7 @@ public interface Bank {
      */
 
 
-    boolean transferBalance(UUID player, UUID target, double balance);
+    boolean transferBalance(UUID player, UUID target, BigDecimal balance);
 
     /*
      *
@@ -160,7 +162,7 @@ public interface Bank {
      *
      */
 
-    boolean transferBalance(Player player, Player target, double balance);
+    boolean transferBalance(Player player, Player target, BigDecimal balance);
 
     /*
      *
@@ -175,19 +177,19 @@ public interface Bank {
      *
      */
 
-    boolean transferBalance(OfflinePlayer player, OfflinePlayer target, double balance);
+    boolean transferBalance(OfflinePlayer player, OfflinePlayer target, BigDecimal balance);
 
-    double getBalance(Player player);
+    BigDecimal getBalance(Player player);
 
-    double getBalance(OfflinePlayer player);
+    BigDecimal getBalance(OfflinePlayer player);
 
-    double getBalance(UUID player);
+    BigDecimal getBalance(UUID player);
 
-    boolean hasBalance(Player player, double balance);
+    boolean hasBalance(Player player, BigDecimal balance);
 
-    boolean hasBalance(UUID player, double balance);
+    boolean hasBalance(UUID player, BigDecimal balance);
 
-    boolean hasBalance(OfflinePlayer player, double balance);
+    boolean hasBalance(OfflinePlayer player, BigDecimal balance);
 
     void removeAccount(OfflinePlayer player);
 
@@ -195,20 +197,11 @@ public interface Bank {
 
     void removeAccount(UUID player);
 
-    void createAccount(OfflinePlayer player, double startBalance);
+    void createAccount(OfflinePlayer player, UserData user);
 
-    void createAccount(Player player, double startBalance);
+    void createAccount(Player player, UserData user);
 
-    void createAccount(UUID player, double startBalance);
+    void createAccount(UUID player, UserData user);
 
-    @Deprecated
-    void createAccount(Player player);
-
-    @Deprecated
-    void createAccount(OfflinePlayer player);
-
-    @Deprecated
-    void createAccount(UUID player);
-
-    void removeAllAccounts(Server server);
+    void removeAllBanks(Server server);
 }

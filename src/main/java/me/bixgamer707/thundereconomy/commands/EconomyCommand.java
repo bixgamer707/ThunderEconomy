@@ -1,4 +1,4 @@
-package me.bixgamer707.thundereconomy.bank;
+package me.bixgamer707.thundereconomy.commands;
 
 import me.bixgamer707.thundereconomy.Economy;
 import org.bukkit.ChatColor;
