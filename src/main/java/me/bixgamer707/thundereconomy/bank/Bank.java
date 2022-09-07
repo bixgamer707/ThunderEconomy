@@ -185,6 +185,12 @@ public interface Bank {
 
     BigDecimal getBalance(UUID player);
 
+    UserData getUser(UUID player);
+
+    UserData getUser(Player player);
+
+    UserData getUser(OfflinePlayer player);
+
     boolean hasBalance(Player player, BigDecimal balance);
 
     boolean hasBalance(UUID player, BigDecimal balance);

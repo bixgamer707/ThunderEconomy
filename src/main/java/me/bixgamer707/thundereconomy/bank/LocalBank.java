@@ -1,5 +1,7 @@
 package me.bixgamer707.thundereconomy.bank;
 
+import me.bixgamer707.thundereconomy.bank.events.AccountCreateEvent;
+import me.bixgamer707.thundereconomy.bank.events.AccountRemoveEvent;
 import me.bixgamer707.thundereconomy.bank.events.PlayerTransactionEvent;
 import me.bixgamer707.thundereconomy.bank.events.ServerTransactionEvent;
 import me.bixgamer707.thundereconomy.bank.helper.TransactionType;
@@ -170,7 +172,33 @@ public abstract class LocalBank implements Bank {
             return;
         }
 
-        userDataMap.put(player.getUniqueId(), userData);
+        AccountCreateEvent event = new AccountCreateEvent(
+                player.getUniqueId(),
+                userData,
+                this
+        );
+        Bukkit.getPluginManager().callEvent(event);
+
+        if(event.isCancelled()){
+            return;
+        }
+
+        userDataMap.put(event.getUUID(), event.getUser());
+    }
+
+    @Override
+    public UserData getUser(UUID player) {
+        return userDataMap.get(player);
+    }
+
+    @Override
+    public UserData getUser(Player player) {
+        return getUser(player.getUniqueId());
+    }
+
+    @Override
+    public UserData getUser(OfflinePlayer player) {
+        return getUser(player.getUniqueId());
     }
 
     @Override
@@ -183,7 +211,19 @@ public abstract class LocalBank implements Bank {
             return;
         }
 
-        userDataMap.put(player.getUniqueId(), user);    }
+        AccountCreateEvent event = new AccountCreateEvent(
+                player.getUniqueId(),
+                user,
+                this
+        );
+        Bukkit.getPluginManager().callEvent(event);
+
+        if(event.isCancelled()){
+            return;
+        }
+
+        userDataMap.put(event.getUUID(), event.getUser());
+    }
 
     @Override
     public void createAccount(UUID uuid, UserData user) {
@@ -191,7 +231,18 @@ public abstract class LocalBank implements Bank {
             return;
         }
 
-        userDataMap.put(uuid, user);
+        AccountCreateEvent event = new AccountCreateEvent(
+                uuid,
+                user,
+                this
+        );
+        Bukkit.getPluginManager().callEvent(event);
+
+        if(event.isCancelled()){
+            return;
+        }
+
+        userDataMap.put(event.getUUID(), event.getUser());
     }
 
     @Override
@@ -206,7 +257,22 @@ public abstract class LocalBank implements Bank {
             return;
         }
 
-        userDataMap.remove(player);
+        if(!userDataMap.containsKey(player)){
+            return;
+        }
+
+        AccountRemoveEvent event = new AccountRemoveEvent(
+                player,
+                getUser(player),
+                this
+        );
+        Bukkit.getPluginManager().callEvent(event);
+
+        if(event.isCancelled()){
+            return;
+        }
+
+        userDataMap.remove(event.getUUID());
     }
 
     @Override

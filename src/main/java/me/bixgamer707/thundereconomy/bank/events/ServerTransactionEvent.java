@@ -53,7 +53,11 @@ public class ServerTransactionEvent extends Event implements Cancellable {
 
     @Nullable
     public Player getPlayer() {
-        return Bukkit.getPlayer(uuid);
+        if(Bukkit.getPlayer(uuid) != null){
+            return Bukkit.getPlayer(uuid);
+        }
+
+        return Bukkit.getOfflinePlayer(uuid).getPlayer();
     }
 
     public BigDecimal getMoney() {
