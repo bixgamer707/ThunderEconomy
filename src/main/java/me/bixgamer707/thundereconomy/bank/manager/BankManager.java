@@ -1,13 +1,14 @@
 package me.bixgamer707.thundereconomy.bank.manager;
 
-import me.bixgamer707.thundereconomy.bank.Bank;
+import me.bixgamer707.thundereconomy.bank.BankData;
+import me.bixgamer707.thundereconomy.bank.helper.Bank;
 import org.bukkit.plugin.Plugin;
 
 import java.util.Map;
 
 public interface BankManager {
 
-    Map<String, Bank> getBanks();
+    Map<String, BankData> getBanks();
 
     /*
      *
@@ -17,7 +18,7 @@ public interface BankManager {
      *
      */
 
-    boolean createBank(String id, Bank bank);
+    boolean createBank(String id, BankData bankData);
 
     /*
      *
@@ -29,7 +30,7 @@ public interface BankManager {
      *
      */
 
-    boolean createBank(String id, Bank bank, Plugin plugin);
+    boolean createBank(String id, BankData bankData, Plugin plugin);
 
     /*
      *
@@ -45,11 +46,21 @@ public interface BankManager {
      *
      *  @param id, The id of the bank you are looking for
      *
+     *  @return Returns a boolean, false if it could not delete the bank (it does not exist) or true if it could delete it.
+     *
+     */
+
+    boolean removeBank(String id, Plugin plugin);
+
+    /*
+     *
+     *  @param id, The id of the bank you are looking for
+     *
      *  @return Returns a bank interface
      *
      */
 
-    Bank getBank(String id);
+    BankData getBank(String id);
 
     /*
      *
@@ -61,7 +72,7 @@ public interface BankManager {
      *
      */
 
-    Bank getBank(String id, Plugin plugin);
+    BankData getBank(String id, Plugin plugin);
 
     /*
      *
@@ -71,5 +82,6 @@ public interface BankManager {
      *
      */
 
-    Bank getBankInServer(String id);
+    BankData getBankInServer(String id);
+
 }

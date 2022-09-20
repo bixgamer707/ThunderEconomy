@@ -16,6 +16,6 @@ public final class Economy extends JavaPlugin {
     }
 
     public void registerCommands(){
-        getCommand("economy").setExecutor(new EconomyCommand(this));
+        getCommand("thundereconomy").setExecutor(new EconomyCommand(this));
     }
 }

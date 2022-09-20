@@ -9,9 +9,9 @@ import java.math.BigDecimal;
 import java.util.Map;
 import java.util.UUID;
 
-public interface Bank {
+public interface BankData {
 
-    /*
+    /**
      *
      * @return Returns a string containing the bank ID
      *
@@ -19,7 +19,7 @@ public interface Bank {
 
     String getId();
 
-    /*
+    /**
      *
      * @return Returns the numerical amounts of the players in the bank
      *
@@ -27,7 +27,7 @@ public interface Bank {
 
     Map<UUID, UserData> getUserDataMap();
 
-    /*
+    /**
      *
      * @param player The uuid of the player for whom the money will be defined
      *
@@ -37,7 +37,7 @@ public interface Bank {
 
     void setBalance(UUID player, BigDecimal balance);
 
-    /*
+    /**
      *
      * @param player The OfflinePlayer of the player for whom the money will be defined
      *
@@ -47,7 +47,7 @@ public interface Bank {
 
     void setBalance(OfflinePlayer player, BigDecimal balance);
 
-    /*
+    /**
      *
      * @param player The Player of the player for whom the money will be defined
      *
@@ -57,7 +57,7 @@ public interface Bank {
 
     void setBalance(Player player, BigDecimal balance);
 
-    /*
+    /**
      *
      * @param player The uuid of the player from whom the money will be removed
      *
@@ -69,7 +69,7 @@ public interface Bank {
 
     boolean withdrawBalance(UUID player, BigDecimal balance);
 
-    /*
+    /**
      *
      * @param player The Player of the player from whom the money will be removed
      *
@@ -81,7 +81,7 @@ public interface Bank {
 
     boolean withdrawBalance(Player player, BigDecimal balance);
 
-    /*
+    /**
      *
      * @param player The OfflinePlayer of the player from whom the money will be removed
      *
@@ -93,7 +93,7 @@ public interface Bank {
 
     boolean withdrawBalance(OfflinePlayer player, BigDecimal balance);
 
-    /*
+    /**
      *
      * @param player The uuid of the player to whom the money is to be given
      *
@@ -106,7 +106,7 @@ public interface Bank {
 
     boolean depositBalance(UUID player, BigDecimal balance);
 
-    /*
+    /**
      *
      * @param player The Player of the player to whom the money is to be given
      *
@@ -120,7 +120,7 @@ public interface Bank {
 
     boolean depositBalance(Player player, BigDecimal balance);
 
-    /*
+    /**
      *
      * @param player The OfflinePlayer of the player to whom the money is to be given
      *
@@ -133,7 +133,7 @@ public interface Bank {
 
     boolean depositBalance(OfflinePlayer player, BigDecimal balance);
 
-    /*
+    /**
      *
      * @param player The uuid of the player from whom the money will be subtracted from the bank to give it to the "target".
      *
@@ -149,7 +149,7 @@ public interface Bank {
 
     boolean transferBalance(UUID player, UUID target, BigDecimal balance);
 
-    /*
+    /**
      *
      * @param player The Player of the player from whom the money will be subtracted from the bank to give it to the "target".
      *
@@ -164,7 +164,7 @@ public interface Bank {
 
     boolean transferBalance(Player player, Player target, BigDecimal balance);
 
-    /*
+    /**
      *
      * @param player The OfflinePlayer of the player from whom the money will be subtracted from the bank to give it to the "target".
      *
@@ -177,11 +177,38 @@ public interface Bank {
      *
      */
 
+
     boolean transferBalance(OfflinePlayer player, OfflinePlayer target, BigDecimal balance);
+
+    /**
+     *
+     * @param player The player from get balance.
+     *
+     * @return Returns the numerical amount of the player's bank.
+     *
+     */
 
     BigDecimal getBalance(Player player);
 
+    /**
+     *
+     * @param player The OfflinePlayer of the player from get balance.
+     *
+     * @return Returns the numerical amount of the player's bank.
+     *
+     */
+
+
     BigDecimal getBalance(OfflinePlayer player);
+
+    /**
+     *
+     * @param player The uuid of the player from get balance.
+     *
+     * @return Returns the numerical amount of the player's bank.
+     *
+     */
+
 
     BigDecimal getBalance(UUID player);
 

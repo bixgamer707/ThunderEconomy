@@ -1,6 +1,6 @@
 package me.bixgamer707.thundereconomy.bank.events;
 
-import me.bixgamer707.thundereconomy.bank.Bank;
+import me.bixgamer707.thundereconomy.bank.BankData;
 import me.bixgamer707.thundereconomy.user.UserData;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -19,12 +19,12 @@ public class AccountCreateEvent extends Event implements Cancellable {
 
     private final UUID uuid;
     private final UserData user;
-    private final Bank bank;
+    private final BankData bankData;
 
-    public AccountCreateEvent(UUID playerUUID, UserData user, Bank bank) {
+    public AccountCreateEvent(UUID playerUUID, UserData user, BankData bankData) {
         this.uuid = playerUUID;
         this.user = user;
-        this.bank = bank;
+        this.bankData = bankData;
         this.isCancelled = false;
     }
 
@@ -52,8 +52,8 @@ public class AccountCreateEvent extends Event implements Cancellable {
         return Bukkit.getOfflinePlayer(uuid).getPlayer();
     }
 
-    public Bank getBank() {
-        return bank;
+    public BankData getBank() {
+        return bankData;
     }
 
     public UserData getUser() {

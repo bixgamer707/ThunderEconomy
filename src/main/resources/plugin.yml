@@ -6,3 +6,11 @@ authors: [ bixgamer707 ]
 description: A economy plugin of the ThunderMC
 website: http://discord.thunderloots.xyz
 
+commands:
+  thundereconomy:
+    description: The main command of the plugin
+    usage: /thundereconomy
+    aliases: [te]
+    permission: thundereconomy.command
+    permission-message: "&cYou don't have permission to execute this command"
+    default: true

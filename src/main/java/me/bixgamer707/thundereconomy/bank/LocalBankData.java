@@ -18,11 +18,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public abstract class LocalBank implements Bank {
+public abstract class LocalBankData implements BankData {
 
     private final Map<UUID, UserData> userDataMap;
     private final String id;
-    public LocalBank(String id){
+    public LocalBankData(String id){
         this.id = id;
         this.userDataMap = new HashMap<>();
     }
