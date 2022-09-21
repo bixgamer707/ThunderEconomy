@@ -1,7 +1,6 @@
 package me.bixgamer707.thundereconomy.bank.manager;
 
 import me.bixgamer707.thundereconomy.bank.BankData;
-import me.bixgamer707.thundereconomy.bank.helper.Bank;
 import org.bukkit.plugin.Plugin;
 
 import java.util.Map;
@@ -9,6 +8,8 @@ import java.util.Map;
 public interface BankManager {
 
     Map<String, BankData> getBanks();
+
+    Map<Plugin, Map<String, BankData>> getBanksPlugin();
 
     /*
      *

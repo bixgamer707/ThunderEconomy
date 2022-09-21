@@ -237,4 +237,8 @@ public interface BankData {
     void createAccount(UUID player, UserData user);
 
     void removeAllBanks(Server server);
+
+    void load();
+
+    void save();
 }

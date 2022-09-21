@@ -23,6 +23,11 @@ public class LocalBankManager implements BankManager {
     }
 
     @Override
+    public Map<Plugin, Map<String, BankData>> getBanksPlugin() {
+        return banksPlugin;
+    }
+
+    @Override
     public boolean createBank(String id, BankData bankData) {
         if(banks.containsKey(id)){
             return false;

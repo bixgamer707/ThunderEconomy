@@ -1,5 +1,6 @@
 package me.bixgamer707.thundereconomy.bank;
 
+import me.bixgamer707.thundereconomy.Economy;
 import me.bixgamer707.thundereconomy.bank.events.AccountCreateEvent;
 import me.bixgamer707.thundereconomy.bank.events.AccountRemoveEvent;
 import me.bixgamer707.thundereconomy.bank.events.PlayerTransactionEvent;

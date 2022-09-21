@@ -7,4 +7,14 @@ public class Bank extends LocalBankData {
     public Bank(String id) {
         super(id);
     }
+
+    @Override
+    public void load() {
+
+    }
+
+    @Override
+    public void save() {
+
+    }
 }
