@@ -1,6 +1,6 @@
 package me.bixgamer707.thundereconomy.bank.events;
 
-import me.bixgamer707.thundereconomy.bank.BankData;
+import me.bixgamer707.thundereconomy.bank.BukkitBankData;
 import me.bixgamer707.thundereconomy.bank.helper.TransactionType;
 import me.bixgamer707.thundereconomy.user.UserData;
 import org.bukkit.Bukkit;
@@ -20,17 +20,17 @@ public class ServerTransactionEvent extends Event implements Cancellable {
     private boolean isCancelled;
 
     private final UUID uuid;
-    private UserData user;
+    private final UserData user;
     private BigDecimal money;
-    private final BankData bankData;
+    private final BukkitBankData bukkitBankData;
     private final TransactionType type;
 
-    public ServerTransactionEvent(UUID playerUUID, UserData user, BigDecimal money, BankData bankData,
+    public ServerTransactionEvent(UUID playerUUID, UserData user, BigDecimal money, BukkitBankData bukkitBankData,
                                   TransactionType type) {
         this.uuid = playerUUID;
         this.user = user;
         this.money = money;
-        this.bankData = bankData;
+        this.bukkitBankData = bukkitBankData;
         this.type = type;
         this.isCancelled = false;
     }
@@ -67,8 +67,8 @@ public class ServerTransactionEvent extends Event implements Cancellable {
         return user;
     }
 
-    public BankData getBank() {
-        return bankData;
+    public BukkitBankData getBank() {
+        return bukkitBankData;
     }
 
     public void setMoney(BigDecimal money) {

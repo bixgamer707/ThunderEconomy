@@ -1,10 +1,10 @@
 package me.bixgamer707.thundereconomy.bank.helper;
 
-import me.bixgamer707.thundereconomy.bank.LocalBankData;
+import me.bixgamer707.thundereconomy.bank.LocalBukkitBankData;
 
-public class Bank extends LocalBankData {
+public class BukkitBank extends LocalBukkitBankData {
 
-    public Bank(String id) {
+    public BukkitBank(String id) {
         super(id);
     }
 

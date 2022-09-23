@@ -1,12 +1,11 @@
 package me.bixgamer707.thundereconomy.bank;
 
-import me.bixgamer707.thundereconomy.Economy;
 import me.bixgamer707.thundereconomy.bank.events.AccountCreateEvent;
 import me.bixgamer707.thundereconomy.bank.events.AccountRemoveEvent;
 import me.bixgamer707.thundereconomy.bank.events.PlayerTransactionEvent;
 import me.bixgamer707.thundereconomy.bank.events.ServerTransactionEvent;
 import me.bixgamer707.thundereconomy.bank.helper.TransactionType;
-import me.bixgamer707.thundereconomy.bank.manager.BankManager;
+import me.bixgamer707.thundereconomy.bank.manager.BukkitBankManager;
 import me.bixgamer707.thundereconomy.user.UserData;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -19,11 +18,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public abstract class LocalBankData implements BankData {
+public abstract class LocalBukkitBankData implements BukkitBankData {
 
     private final Map<UUID, UserData> userDataMap;
     private final String id;
-    public LocalBankData(String id){
+    public LocalBukkitBankData(String id){
         this.id = id;
         this.userDataMap = new HashMap<>();
     }
@@ -287,7 +286,7 @@ public abstract class LocalBankData implements BankData {
         if(server == null){
             return;
         }
-        RegisteredServiceProvider<BankManager> econ = server.getServicesManager().getRegistration(BankManager.class);
+        RegisteredServiceProvider<BukkitBankManager> econ = server.getServicesManager().getRegistration(BukkitBankManager.class);
         if(econ == null){
             return;
         }

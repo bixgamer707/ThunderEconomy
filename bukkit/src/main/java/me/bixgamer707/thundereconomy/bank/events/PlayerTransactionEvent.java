@@ -1,6 +1,7 @@
 package me.bixgamer707.thundereconomy.bank.events;
 
-import me.bixgamer707.thundereconomy.bank.BankData;
+import me.bixgamer707.thundereconomy.bank.BukkitBankData;
+import me.bixgamer707.thundereconomy.bank.helper.TransactionType;
 import me.bixgamer707.thundereconomy.user.UserData;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -11,20 +12,28 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
-public class AccountCreateEvent extends Event implements Cancellable {
+public class PlayerTransactionEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
     private boolean isCancelled;
 
     private final UUID uuid;
+    private final UUID targetUuid;
     private final UserData user;
-    private final BankData bankData;
+    private BigDecimal money;
+    private final BukkitBankData bank;
+    private final TransactionType type;
 
-    public AccountCreateEvent(UUID playerUUID, UserData user, BankData bankData) {
+    public PlayerTransactionEvent(UUID playerUUID, UUID targetUUID, UserData user, BigDecimal money, BukkitBankData bukkitBankData,
+                                  TransactionType type) {
         this.uuid = playerUUID;
+        this.targetUuid = targetUUID;
         this.user = user;
-        this.bankData = bankData;
+        this.money = money;
+        this.bank = bukkitBankData;
+        this.type = type;
         this.isCancelled = false;
     }
 
@@ -52,12 +61,37 @@ public class AccountCreateEvent extends Event implements Cancellable {
         return Bukkit.getOfflinePlayer(uuid).getPlayer();
     }
 
-    public BankData getBank() {
-        return bankData;
+    public BukkitBankData getBank() {
+        return bank;
+    }
+
+    public BigDecimal getMoney() {
+        return money;
+    }
+
+    public UUID getTargetUuid() {
+        return targetUuid;
+    }
+
+    @Nullable
+    public Player getTarget(){
+        if(Bukkit.getPlayer(targetUuid) != null){
+            return Bukkit.getPlayer(targetUuid);
+        }
+
+        return Bukkit.getOfflinePlayer(targetUuid).getPlayer();
     }
 
     public UserData getUser() {
         return user;
+    }
+
+    public void setMoney(BigDecimal money) {
+        this.money = money;
+    }
+
+    public TransactionType getType() {
+        return type;
     }
 
     @Override
